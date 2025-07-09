@@ -2,48 +2,38 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DragDrop.Entities.Tiles;
-using DragDrop.Interfaces;
 
 namespace DragDrop.ViewModels;
 
-public partial class GalleryViewModel : ObservableObject, IDragDropableViewModel
+public partial class GalleryViewModel : ObservableObject
 {
     private MonkeyTile? _draggedTile;
-    private MonkeyTile? _placeHolderTile;
     
     [ObservableProperty] private ObservableCollection<MonkeyTile> _monkeys;
 
     public GalleryViewModel()
     {
-        Monkeys = new ObservableCollection<MonkeyTile>();
+        Monkeys = [];
         CreateMonkeyCollection();
     }
 
     [RelayCommand]
     private Task DragStarting(MonkeyTile tile)
     {
+        if (tile.CanDrag == false) return Task.CompletedTask;
         _draggedTile = tile;
-        return Task.CompletedTask;
-    }
-
-    [RelayCommand]
-    private Task DragOver(MonkeyTile tile)
-    {
-        if (tile == _draggedTile) return Task.CompletedTask;
-        _placeHolderTile = tile;
         return Task.CompletedTask;
     }
 
     [RelayCommand]
     private Task Drop(MonkeyTile tile)
     {
-        if (_draggedTile == null || _placeHolderTile == null) return Task.CompletedTask;
+        if (_draggedTile == null || tile.AllowDrag == false) return Task.CompletedTask;
         
         var oldIndex = Monkeys.IndexOf(_draggedTile);
-        var newIndex = Monkeys.IndexOf(_placeHolderTile);
+        var newIndex = Monkeys.IndexOf(tile);
         Monkeys.Move(oldIndex, newIndex);
         _draggedTile = null;
-        _placeHolderTile = null;
         return Task.CompletedTask;
     }
     

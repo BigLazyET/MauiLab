@@ -11,8 +11,9 @@
         <viewModels:GalleryViewModel />
     </ContentPage.BindingContext>
 
-    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
-        <CollectionView ItemsSource="{Binding Monkeys}">
+    <Grid RowDefinitions="60, *" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Label Grid.Row="0" Text="直接将drag和drop的command定义在viewmodel中，每一项通过relativeSource引用到command，更为方便！"/>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Monkeys}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="5"/>
             </CollectionView.ItemsLayout>
@@ -21,15 +22,14 @@
                     <!-- <controls:DragDropView> -->
                         <Grid Padding="10" RowDefinitions="35,35" ColumnDefinitions="70,80">
                         <Grid.GestureRecognizers>
-                            <DragGestureRecognizer DragStartingCommand="{Binding BindingContext.DragStartingCommand, 
+                            <DragGestureRecognizer CanDrag="{Binding CanDrag}" 
+                                                   DragStartingCommand="{Binding BindingContext.DragStartingCommand, 
                                                                          Source={RelativeSource AncestorType={x:Type CollectionView}}}"
                                                    DragStartingCommandParameter="{Binding .}" />
-                            <DropGestureRecognizer DropCommand="{Binding BindingContext.DropCommand,
+                            <DropGestureRecognizer AllowDrop="{Binding AllowDrag}"
+                                                   DropCommand="{Binding BindingContext.DropCommand,
                                                                  Source={RelativeSource AncestorType={x:Type CollectionView}}}"
-                                                   DropCommandParameter="{Binding .}"
-                                                   DragOverCommand="{Binding BindingContext.DragOverCommand,
-                                                                 Source={RelativeSource AncestorType={x:Type CollectionView}}}"
-                                                   DragOverCommandParameter="{Binding .}"/>
+                                                   DropCommandParameter="{Binding .}"/>
                         </Grid.GestureRecognizers>
                         <Image Grid.RowSpan="2"
                                Source="{Binding ImageUrl}"

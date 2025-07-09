@@ -11,8 +11,9 @@
         <viewModels:MainViewModel />
     </ContentPage.BindingContext>
 
-    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
-        <CollectionView ItemsSource="{Binding TileSegments}">
+    <Grid RowDefinitions="60, *" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Label Grid.Row="0" Text="将drag和drop的command定义在每一项中，数据类型为TileSegment&lt;T&gt;，方便扩展"/>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding TileSegments}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="5"/>
             </CollectionView.ItemsLayout>
