@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:DragDrop.ViewModels"
+             xmlns:entities="clr-namespace:DragDrop.Entities"
+             xmlns:tiles="clr-namespace:DragDrop.Entities.Tiles"
+             x:Class="DragDrop.MainPage">
+    
+    <ContentPage.BindingContext>
+        <viewModels:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        <CollectionView ItemsSource="{Binding TileSegments}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="5"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entities:TileSegment(tiles:MonkeyTile)">
+                    <Grid Padding="10" RowDefinitions="35,35" ColumnDefinitions="70,80">
+                        <Grid.GestureRecognizers>
+                            <DragGestureRecognizer CanDrag="{Binding CanDrag}" 
+                                                   DragStartingCommand="{Binding DragStartingCommand}" />
+                            <DropGestureRecognizer AllowDrop="{Binding AllowDrop}"
+                                                   DropCommand="{Binding DropCommand}"
+                                                   DragOverCommand="{Binding DragOverCommand}"
+                                                   DragLeaveCommand="{Binding DragLeaveCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Image Grid.RowSpan="2"
+                               Source="{Binding Tile.ImageUrl}"
+                               Aspect="AspectFill"
+                               HeightRequest="60"
+                               WidthRequest="60" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Tile.Name}"
+                               FontAttributes="Bold"
+                               LineBreakMode="TailTruncation" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{Binding Tile.Location}"
+                               LineBreakMode="TailTruncation"
+                               FontAttributes="Italic"
+                               VerticalOptions="End" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
