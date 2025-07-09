@@ -4,6 +4,7 @@
              xmlns:viewModels="clr-namespace:DragDrop.ViewModels"
              xmlns:entities="clr-namespace:DragDrop.Entities"
              xmlns:tiles="clr-namespace:DragDrop.Entities.Tiles"
+             xmlns:controls="clr-namespace:DragDrop.Controls"
              x:Class="DragDrop.MainPage">
     
     <ContentPage.BindingContext>
@@ -13,19 +14,20 @@
     <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
         <CollectionView ItemsSource="{Binding TileSegments}">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="5"></GridItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="5"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entities:TileSegment(tiles:MonkeyTile)">
-                    <Grid Padding="10" RowDefinitions="35,35" ColumnDefinitions="70,80">
-                        <Grid.GestureRecognizers>
-                            <DragGestureRecognizer CanDrag="{Binding CanDrag}" 
-                                                   DragStartingCommand="{Binding DragStartingCommand}" />
-                            <DropGestureRecognizer AllowDrop="{Binding AllowDrop}"
-                                                   DropCommand="{Binding DropCommand}"
-                                                   DragOverCommand="{Binding DragOverCommand}"
-                                                   DragLeaveCommand="{Binding DragLeaveCommand}"/>
-                        </Grid.GestureRecognizers>
+                    <controls:DragDropView>
+                        <Grid Padding="10" RowDefinitions="35,35" ColumnDefinitions="70,80">
+                        <!-- <Grid.GestureRecognizers> -->
+                        <!--     <DragGestureRecognizer CanDrag="{Binding CanDrag}"  -->
+                        <!--                            DragStartingCommand="{Binding DragStartingCommand}" /> -->
+                        <!--     <DropGestureRecognizer AllowDrop="{Binding AllowDrop}" -->
+                        <!--                            DropCommand="{Binding DropCommand}" -->
+                        <!--                            DragOverCommand="{Binding DragOverCommand}" -->
+                        <!--                            DragLeaveCommand="{Binding DragLeaveCommand}"/> -->
+                        <!-- </Grid.GestureRecognizers> -->
                         <Image Grid.RowSpan="2"
                                Source="{Binding Tile.ImageUrl}"
                                Aspect="AspectFill"
@@ -41,7 +43,8 @@
                                LineBreakMode="TailTruncation"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
-                    </Grid>
+                        </Grid>
+                    </controls:DragDropView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

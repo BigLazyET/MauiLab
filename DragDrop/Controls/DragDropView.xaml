@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DragDrop.Controls.DragDropView">
+    <ContentView.GestureRecognizers>
+        <DragGestureRecognizer CanDrag="{Binding CanDrag}" 
+                               DragStartingCommand="{Binding DragStartingCommand}" />
+        <DropGestureRecognizer AllowDrop="{Binding AllowDrop}"
+                               DropCommand="{Binding DropCommand}"
+                               DragOverCommand="{Binding DragOverCommand}"
+                               DragLeaveCommand="{Binding DragLeaveCommand}"/>
+    </ContentView.GestureRecognizers>
+    <ContentPresenter/>
+</ContentView>
