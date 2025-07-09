@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabShell.Views.BrazilMonkeyView">
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" RowDefinitions="35,35" ColumnDefinitions="70,80">
+        <Image Grid.RowSpan="2"
+               Source="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Golden_lion_tamarin_portrait3.jpg/220px-Golden_lion_tamarin_portrait3.jpg"
+               Aspect="AspectFill"
+               HeightRequest="60"
+               WidthRequest="60" />
+        <Label Grid.Column="1"
+               Text="Golden Lion Tamarin"
+               FontAttributes="Bold"
+               LineBreakMode="TailTruncation" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Text="Brazil"
+               LineBreakMode="TailTruncation"
+               FontAttributes="Italic"
+               VerticalOptions="End" />
+    </Grid>
+</ContentView>

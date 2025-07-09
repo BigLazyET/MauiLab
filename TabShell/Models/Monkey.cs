@@ -1,7 +1,10 @@
-namespace DragDrop.Entities.Tiles;
+using TabShell.Enums;
 
-public class MonkeyTile : Tile
+namespace TabShell.Models;
+
+public class Monkey
 {
+    public MonkeyKind Kind { get; set; }
     public string Name { get; set; }
     public string Location { get; set; }
     public string Details { get; set; }

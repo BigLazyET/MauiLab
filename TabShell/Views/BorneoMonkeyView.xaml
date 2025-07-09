@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabShell.Views.BorneoMonkeyView">
+    <Grid HorizontalOptions="Center" VerticalOptions="Center" RowDefinitions="35,35" ColumnDefinitions="70,80">
+        <Image Grid.RowSpan="2"
+               Source="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Proboscis_Monkey_in_Borneo.jpg/250px-Proboscis_Monkey_in_Borneo.jpg"
+               Aspect="AspectFill"
+               HeightRequest="60"
+               WidthRequest="60" />
+        <Label Grid.Column="1"
+               Text="Proboscis Monkey"
+               FontAttributes="Bold"
+               LineBreakMode="TailTruncation" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Text="Borneo"
+               LineBreakMode="TailTruncation"
+               FontAttributes="Italic"
+               VerticalOptions="End" />
+    </Grid>
+</ContentView>

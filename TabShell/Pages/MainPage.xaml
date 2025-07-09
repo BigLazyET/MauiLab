@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TabShell.Controls"
+             xmlns:models="clr-namespace:TabShell.Models"
+             xmlns:enums="clr-namespace:TabShell.Enums"
+             x:Class="TabShell.MainPage">
+
+    <ContentPage.Resources>
+        <controls:MonkeyDataTemplateSelector x:Key="MonkeyDataTemplateSelector"/>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="60,*">
+        <CollectionView x:Name="Tab" Grid.Row="0" HorizontalOptions="Center" SelectionMode="Single" SelectionChanged="OnTabSelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemsSource>
+                <!-- <x:Array Type="{x:Type models:Monkey}"> -->
+                <!--     <models:Monkey Kind="BorneoMonkey" Name="Proboscis Monkey" Location="Borneo" Details="The proboscis monkey or long-nosed monkey, known as the bekantan in Malay, is a reddish-brown arboreal Old World monkey that is endemic to the south-east Asian island of Borneo."  -->
+                <!--                    ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Proboscis_Monkey_in_Borneo.jpg/250px-Proboscis_Monkey_in_Borneo.jpg"/> -->
+                <!--     <models:Monkey Kind="JapanMonkey" Name="Japanese Macaque" Location="Japan" Details="The Japanese macaque, is a terrestrial Old World monkey species native to Japan. They are also sometimes known as the snow monkey because they live in areas where snow covers the ground for months each."  -->
+                <!--                    ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Macaca_fuscata_fuscata1.jpg/220px-Macaca_fuscata_fuscata1.jpg"/> -->
+                <!--     <models:Monkey Kind="BrazilMonkey" Name="Golden Lion Tamarin" Location="Brazil" Details="The golden lion tamarin also known as the golden marmoset, is a small New World monkey of the family Callitrichidae."  -->
+                <!--                    ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Golden_lion_tamarin_portrait3.jpg/220px-Golden_lion_tamarin_portrait3.jpg"/> -->
+                <!-- </x:Array> -->
+                <x:Array Type="{x:Type enums:MonkeyKind}">
+                    <enums:MonkeyKind>BorneoMonkey</enums:MonkeyKind>
+                    <enums:MonkeyKind>BrazilMonkey</enums:MonkeyKind>
+                    <enums:MonkeyKind>JapanMonkey</enums:MonkeyKind>
+                </x:Array>
+            </CollectionView.ItemsSource>
+        </CollectionView>
+        <controls:TemplatedContentView x:Name="TemplatedView" Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill" 
+                                       ContentTemplateSelector="{StaticResource MonkeyDataTemplateSelector}"/>
+    </Grid>
+</ContentPage>
