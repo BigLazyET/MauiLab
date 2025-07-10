@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ItemStyle.ViewModels"
+             xmlns:converters="clr-namespace:ItemStyle.Converters"
+             xmlns:models="clr-namespace:ItemStyle.Models"
+             x:Class="ItemStyle.Pages.VSMCheckPage">
+    <ContentPage.BindingContext>
+        <viewModels:VsmCheckViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <Color x:Key="SelectedColor">#148EFC</Color>
+        <Color x:Key="SelectedBgColor">#00FFFF</Color>
+        <DataTemplate x:Key="CvTemplate" x:DataType="models:MonkeyItem">
+            <Grid RowDefinitions="35,*">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{StaticResource SelectedBgColor}"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Image Grid.Row="0" Source="{Binding ImageUrl}" HeightRequest="35" WidthRequest="35" Aspect="AspectFit"/>
+                <Label x:Name="LabelName" Grid.Row="1" Text="{Binding Name}" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource SelectedColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
+                            <Setter Property="TextColor" Value="White" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+        </DataTemplate>
+    </ContentPage.Resources>
+    
+    <!-- VisualStateManager 的 Selected 状态只用于单选，多选时不要用 VSM -->
+    <!-- VisualStateManager的局限性总的来说还是比较多，推荐用trigger或纯绑定的方式 -->
+    <Grid RowDefinitions="*,1,*">
+        <CollectionView x:Name="Cv1" Grid.Row="0" SelectionMode="Single"
+                        ItemsSource="{Binding Monkeys}"
+                        ItemTemplate="{StaticResource CvTemplate}"
+                        SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem,Source={x:Reference Cv1}}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+        <BoxView Grid.Row="1" HeightRequest="0.5" HorizontalOptions="FillAndExpand" BackgroundColor="Red" />
+        <!-- <CollectionView x:Name="Cv2" Grid.Row="2" SelectionMode="Single" -->
+        <!--                 ItemsSource="{Binding Monkeys}" -->
+        <!--                 SelectionChangedCommand="{Binding SelectionChangedCommand}" -->
+        <!--                 SelectionChangedCommandParameter="{Binding SelectedItem,Source={x:Reference Cv2}}"> -->
+        <!--     <CollectionView.ItemsLayout> -->
+        <!--         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/> -->
+        <!--     </CollectionView.ItemsLayout> -->
+        <!--     <CollectionView.ItemTemplate> -->
+        <!--         <DataTemplate> -->
+        <!--             <StackLayout> -->
+        <!--                 <StackLayout.Triggers> -->
+        <!--                     <DataTrigger TargetType="StackLayout" Binding="{Binding IsSelected}" Value="True"> -->
+        <!--                         <Setter Property="BackgroundColor" Value="{StaticResource SelectedBgColor}"/> -->
+        <!--                     </DataTrigger> -->
+        <!--                     <DataTrigger TargetType="StackLayout" Binding="{Binding IsSelected}" Value="False"> -->
+        <!--                         <Setter Property="BackgroundColor" Value="Transparent"/> -->
+        <!--                     </DataTrigger> -->
+        <!--                 </StackLayout.Triggers> -->
+        <!--                 <Image Source="{Binding ImageUrl}" HeightRequest="35" WidthRequest="35" Aspect="AspectFit"/> -->
+        <!--                 <Label Text="{Binding Name}" HorizontalOptions="Center"> -->
+        <!--                     <Label.Triggers> -->
+        <!--                         <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True"> -->
+        <!--                             <Setter Property="TextColor" Value="{StaticResource SelectedColor}" /> -->
+        <!--                         </DataTrigger> -->
+        <!--                         <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False"> -->
+        <!--                             <Setter Property="TextColor" Value="White" /> -->
+        <!--                         </DataTrigger> -->
+        <!--                     </Label.Triggers> -->
+        <!--                 </Label> -->
+        <!--             </StackLayout> -->
+        <!--         </DataTemplate> -->
+        <!--     </CollectionView.ItemTemplate> -->
+        <!-- </CollectionView> -->
+    </Grid>
+</ContentPage>

@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "MacCatalyst": {
+      "commandName": "Project",
+      "commandLineArgs": "",
+      "executablePath": "/Users/yuuhhe/Github/MauiLab/ItemStyle/bin/Debug/net8.0-maccatalyst/maccatalyst-x64/",
+      "workingDirectory": "/xxx/yyy/",
+      "launchBrowser": false,
+      "applicationUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+
+      "dotnetRunMessages": true,
+      "framework": "net8.0-maccatalyst"
+    }
+  }
+}
